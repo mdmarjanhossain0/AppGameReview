@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+
+<style>
+    a {
+        color: #145DA0;
+    }
+</style>
+<section class="section lb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="blog-custom-build">
+                        {% for item in blog_posts  %}
+                        <div class="blog-box wow fadeIn">
+                            {% if item.image %}
+                            <div class="post-media">
+                                {% thumbnail item.image "800x460" crop="center" as im %}
+                                <a href="{% url 'blog:details' item.slug %}" title="">
+                                    <img src="{{ im.url }}" alt="{{ item.titile }}" width="{{ im.width }}"
+                                        height="{{ im.height }}" class="img-fluid">
+                                    <div class="hovereffect">
+                                        <span></span>
+                                    </div>
+                                    <!-- end hover -->
+                                </a>
+                                {% endthumbnail %}
+                            </div>
+                            {% endif %}
+
+                            <!-- end media -->
+                            <div class="blog-meta big-meta text-center">
+
+                                <h4><a href="{% url 'blog:details' item.slug %}"
+                                        title="{{ item.title }}">{{ item.title }}</a></h4>
+                                <p>{{ item.meta_description }}</p>
+                                <small><a href="{% url 'blog:details' item.slug %}"
+                                        title="">{{ item.date_updated.date }}</a></small>
+                                <small><a href="{% url 'blog:details' item.slug %}" title=""><i class="fa fa-eye"></i>
+                                        {{ item.visited }}</a></small>
+                            </div><!-- end meta -->
+                        </div><!-- end blog-box -->
+                        <hr class="invis">
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <hr class="invis">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {% for i in blog_posts.paginator.page_range %}
+                                {% if blog_posts.number == i %}
+                                <li class="page-item">
+                                    <a class="page-link nav-background selected_page_number" href="">{{ i }}</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        href="?{% if query %}query={{query}}&{% endif %}page={{ i }}">{{ i }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% if blog_posts.has_next %}
+                                <li class=" page-item">
+                                    <a class="page-link"
+                                        href="?{% if query %}query={{query}}&{% endif %}page={{ blog_posts.next_page_number }}">Next</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end col -->
+
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="sidebar">
+                    <div class="widget">
+                        <h2 class="widget-title">Popular Posts</h2>
+                        <div class="blog-list-widget">
+                            <div class="list-group">
+                                {% for  item in popular_posts  %}
+                                <a href="{% url 'blog:details' item.slug %}"
+                                    class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <div class="w-100 justify-content-between">
+                                        {% if item.image %}
+                                        {% thumbnail item.image "90x90" crop="center" as im %}
+                                        <img src="{{ im.url }}" alt="{{ item.title }}" width="{{ im.width }}"
+                                            height="{{ im.height }}" class="img-fluid float-left">
+                                        {% endthumbnail %}
+                                        {% endif %}
+                                        <h5 class="mb-1">{{ item.title }}</h5>
+                                        <small>{{ item.date_updated.date }}</small>
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div><!-- end blog-list -->
+                    </div><!-- end widget -->
+
+                    <!-- <div class="widget">
+                        <h2 class="widget-title">Popular Categories</h2>
+                        <div class="link-widget">
+                            <ul>
+                                <li><a href="#">Marketing <span>(21)</span></a></li>
+                            </ul>
+                        </div>
+                    </div> -->
+                    <!-- end widget -->
+                </div><!-- end sidebar -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Site Metas -->
+<title>Markedia - Marketing Blog Template</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Site Icons -->
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+<!-- Design fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+<!-- FontAwesome Icons core CSS -->
+<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="{% static 'style.css' %}" rel="stylesheet">
+
+<!-- Animate styles for this template -->
+<link href="{% static 'css/animate.css' %}" rel="stylesheet">
+
+<!-- Responsive styles for this template -->
+<link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+<!-- Colors for this template -->
+<link href="{% static 'css/colors.css' %}" rel="stylesheet">
+
+<!-- Version Marketing CSS for this template -->
+<link href="{% static 'css/version/marketing.css' %}" rel="stylesheet">
+
+<style>
+    .custom-navbar {
+        display: flex !important;
+        align-items: center;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .navbar-toggler-right {
+        top: 0.73rem;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .custom-navbar {
+            align-items: flex-start;
+            padding-bottom: 0.5rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        {% include "snippets/header.html" %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+
+
+
+        {% include "snippets/footer.html" %}
+    </div><!-- end wrapper -->
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/animate.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+</html>

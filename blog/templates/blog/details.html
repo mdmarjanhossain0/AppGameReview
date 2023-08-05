@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+
+<style>
+	a {
+		color: #145DA0;
+	}
+</style>
+
+
+
+<section class="section lb">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+				<div class="page-wrapper">
+					<div class="blog-title-area">
+						<ol class="breadcrumb hidden-xs-down">
+							<li class="breadcrumb-item"><a href="/">Home</a></li>
+							<li class="breadcrumb-item"><a href="/">Blog</a></li>
+							<li class="breadcrumb-item active">{{item.title}}
+							</li>
+						</ol>
+
+						<h3>{{ item.title }}</h3>
+
+						<div class="blog-meta big-meta">
+							<small><a href="" title="">{{ item.date_updated }}</a></small>
+							<small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+						</div><!-- end meta -->
+					</div><!-- end title -->
+
+					{% if item.image %}
+					<div class="single-post-media">
+						<img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid">
+					</div><!-- end media -->
+					{% endif %}
+
+					<div class="blog-content">
+						{{ item.content|safe }}
+					</div><!-- end content -->
+
+
+					<br>
+
+					<br>
+
+					<br>
+
+					<br>
+
+					<hr class="invis1">
+
+					<div class="custombox clearfix">
+						<h4 class="small-title">You may also like</h4>
+						<div class="row">
+							{% if previous_post %}
+							<div class="col-lg-6">
+								<div class="blog-box">
+									{% if previous_post.image %}
+									<div class="post-media">
+										{% thumbnail previous_post.image "800x460" crop="center" as im %}
+										<a href="{% url 'blog:details' previous_post.slug %}"
+											title="{{ previous_post.title }}">
+											<img src="{{ im.url }}" alt="{{ previous_post.title }}" class="img-fluid">
+											<div class="hovereffect">
+												<span class=""></span>
+											</div><!-- end hover -->
+										</a>
+										{% endthumbnail %}
+									</div><!-- end media -->
+									{% endif %}
+									<div class="blog-meta">
+										<h4><a href="{% url 'blog:details' previous_post.slug %}"
+												title="{{ previous_post.title }}">{{ previous_post.title }}</a></h4>
+										<small><a href="{% url 'blog:details' previous_post.slug %}"
+												title="{{ previous_post.title }}">{{ previous_post.date_updated.date }}</a></small>
+										<small><a href="{% url 'blog:details' previous_post.slug %}"
+												title="{{ previous_post.title }}">{{ previous_post.visited }}</a></small>
+									</div><!-- end meta -->
+								</div><!-- end blog-box -->
+							</div><!-- end col -->
+							{% endif %}
+
+
+							{% if next_post %}
+							<div class="col-lg-6">
+								<div class="blog-box">
+									{% if next_post.image %}
+									<div class="post-media">
+										{% thumbnail next_post.image "800x460" crop="center" as im %}
+										<a href="{% url 'blog:details' next_post.slug %}" title="{{ next_post.title }}">
+											<img src="{{ im.url }}" alt="{{ next_post.title }}" class="img-fluid">
+											<div class="hovereffect">
+												<span class=""></span>
+											</div><!-- end hover -->
+										</a>
+										{% endthumbnail %}
+									</div><!-- end media -->
+									{% endif %}
+									<div class="blog-meta">
+										<h4><a href="{% url 'blog:details' next_post.slug %}"
+												title="{{ next_post.title }}">{{ next_post.title }}</a></h4>
+										<small><a href="{% url 'blog:details' next_post.slug %}"
+												title="{{ next_post.title }}">{{ next_post.date_updated.date }}</a></small>
+										<small><a href="{% url 'blog:details' next_post.slug %}"
+												title="{{ next_post.title }}">{{ next_post.visited }}</a></small>
+									</div><!-- end meta -->
+								</div><!-- end blog-box -->
+							</div><!-- end col -->
+							{% endif %}
+
+						</div><!-- end row -->
+					</div><!-- end custom-box -->
+
+					<hr class="invis1">
+
+					<div class="custombox clearfix">
+						{% with allcomments.count as total_comments %}
+						<h4 class="small-title">
+							{{ total_comments }} comment{{ total_comments|pluralize }}
+						</h4>
+						{% endwith %}
+						{% load mptt_tags %}
+						<div class="row">
+							<div class="col-lg-12">
+								{% recursetree comments %}
+								<div class="comments-list">
+									<div class="media">
+										<a class="media-left" href="#">
+											<img src="upload/author.jpg" alt="" class="rounded-circle">
+										</a>
+										<div class="media-body">
+											<h4 class="media-heading user_name">{{ node.name }}
+												<small>{{ node.publish.date }}</small></h4>
+											<p>{{ node.content }}</p>
+											{% if node.level < 3 %}
+											<button class="more-list btn btn-primary btn-sm"
+												style="outline: none; border: none; background: #EFF4F7">Reply
+											</button>
+											{% endif %}
+											{% if not node.is_leaf_node %}
+											<div class="children pl-2 pl-md-5">
+												{{ children }}
+											</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								{% endrecursetree %}
+								<div class="container"
+									style="margin-top: 1rem; border-top: 1rem solid #EFF4F7; padding: 1rem">
+									<div id="myDIV" style="display:block;">
+										<form id="myForm" method="post">
+											<h2
+												style="text-align: center; margin-top: 1rem; margin-bottom: 1rem; color: var(--bs-link-color)">
+												Create new comment</h2>
+											{{ comment_form.as_p }}
+											{% csrf_token %}
+											<button type="submit"
+												class="btn btn-primary btn-lg btn-block">Submit</button>
+										</form>
+									</div>
+								</div>
+							</div><!-- end col -->
+						</div><!-- end row -->
+					</div><!-- end custom-box -->
+
+					<hr class="invis1">
+				</div><!-- end page-wrapper -->
+			</div><!-- end col -->
+
+			<div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+				<div class="sidebar">
+
+					<div class="widget">
+						<h2 class="widget-title">Related Posts</h2>
+						<div class="blog-list-widget">
+							<div class="list-group">
+								{% for  item in related_posts  %}
+								<a href="{% url 'blog:details' item.slug %}"
+									class="list-group-item list-group-item-action flex-column align-items-start">
+									<div class="w-100 justify-content-between">
+										{% if item.image %}
+										{% thumbnail item.image "90x90" crop="center" as im %}
+										<img src="{{ im.url }}" alt="{{ item.title }}" width="{{ im.width }}"
+											height="{{ im.height }}" class="img-fluid float-left">
+										{% endthumbnail %}
+										{% endif %}
+										<h5 class="mb-1">{{ item.title }}</h5>
+										<small>{{ item.date_updated.date }}</small>
+									</div>
+								</a>
+								{% endfor %}
+							</div>
+						</div><!-- end blog-list -->
+					</div><!-- end widget -->
+
+				</div><!-- end sidebar -->
+			</div><!-- end col -->
+		</div><!-- end row -->
+	</div><!-- end container -->
+</section>
+
+
+
+{% endblock content %}
