@@ -1,0 +1,12 @@
+Django==3.2
+django-ckeditor==6.2.0
+django-filter==21.1
+django-mptt==0.13.4
+djangorestframework==3.12.4
+opencv-python==4.5.4.60
+Pillow==8.4.0
+sorl-thumbnail==12.9.0
+python-decouple
+django-ckeditor-5==0.1.8
+django-cors-headers==3.11.0
+djangorestframework-recursive==0.1.2
