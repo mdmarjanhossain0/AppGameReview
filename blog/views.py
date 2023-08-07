@@ -110,3 +110,7 @@ def home_view(request):
     context["blog_posts"] = blog_posts
     context["popular_posts"] = popular_posts
     return render(request, "blog/home.html", context=context)
+
+
+def privacy_policy_view(request):
+    return render(request, "privacy_policy.html", {})

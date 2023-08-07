@@ -16,11 +16,9 @@ from account.views import (
 
 from blog.sitemaps import BlogPostSitemap
 
-# sitemaps = {
-#     "blog": BlogPostSitemap,
-#     "course": CoursesSiteMap,
-#     "topic": CoursesTopicSiteMap,
-# }
+sitemaps = {
+    "blog": BlogPostSitemap,
+}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -36,12 +34,12 @@ urlpatterns = [
     path("api/account/", include("account.api.urls", "account_api")),
     path("ckeditor5/", include("django_ckeditor_5.urls")),
     # path("privacy-policy", privacy_policy_view, name="privacy_policy"),
-    # path(
-    #     "sitemap.xml",
-    #     sitemap,
-    #     {"sitemaps": sitemaps},
-    #     name="django.contrib.sitemaps.views.sitemap",
-    # ),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
     path("robots.txt", robots_txt, name="robotstext"),
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     path(
