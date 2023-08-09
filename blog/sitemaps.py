@@ -17,4 +17,4 @@ class BlogPostSitemap(Sitemap):
 
     # returns the URL of the article object
     def location(self, obj):
-        return f"article/{obj.slug}"
+        return f"/article/{obj.slug}"
