@@ -4,17 +4,36 @@
 
 {% block content %}
 
+{% block metatags %}
+<title>{{ item.title }}</title>
+<link rel="canonical" href="https://playreviewhub.com/article/{{ item.slug }}" />
+<meta name="keywords" content="{{ item.meta_keywords }}">
+<meta name="description" content="{{ item.meta_description }}">
+
+<meta property="og:url" content="https://playreviewhub.com/article/{{ item.slug }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ item.title }}" />
+<meta property="og:description" content="{{ item.meta_descripiton }}" />
+{% if item.image %}
+<meta property="og:image" content="https://playreviewhub.com{{ item.image.url }}" />
+{% else %}
+<meta property="og:image" content="https://playreviewhub.com{% static 'favicon.ico' %}" />
+{% endif %}
+<meta name="author" content="Md Marjan Hossain">
+{% endblock %}
 <style>
 	a {
 		color: #145DA0;
 	}
-
-
-
-
 	.blog-content img {
 		max-width: 100% !important;
 		text-align: center !important;
+	}
+
+
+
+	.blog-content * {
+		max-height: 100%;
 	}
 </style>
 
@@ -37,7 +56,7 @@
 
 						<div class="blog-meta big-meta">
 							<small><a href="" title="">{{ item.date_updated }}</a></small>
-							<small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+							<small><a href="#" title=""><i class="fa fa-eye"></i> {{ item.visited }}</a></small>
 						</div><!-- end meta -->
 					</div><!-- end title -->
 

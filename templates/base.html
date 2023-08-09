@@ -10,14 +10,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Site Metas -->
-<title>Markedia - Marketing Blog Template</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
+{% block metatags %}
+<title>PlayReviewHub</title>
+<link rel="canonical" href="https://playreviewhub.com" />
+<meta name="keywords"
+    content="App Game Mod Review">
+<meta name="description"
+    content="Get the latest reviews and ratings on the newest app games. Find out which games are worth your time with PlayReviewHub. Discover the best app games, read reviews and get expert advice">
+
+<meta property="og:url" content="https://playreviewhub.com" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="PlayReviewHub" />
+<meta property="og:description"
+    content="Get the latest reviews and ratings on the newest app games. Find out which games are worth your time with PlayReviewHub. Discover the best app games, read reviews and get expert advice" />
+<meta property="og:image" content="https://playreviewhub.com{% static 'favicon.ico' %}" />
+<meta name="author" content="Md Marjan Hossain">
+{% endblock %}
 
 <!-- Site Icons -->
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+<link rel="manifest" href="{% static 'site.webmanifest' %}">
 
 <!-- Design fonts -->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
