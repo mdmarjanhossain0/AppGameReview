@@ -112,5 +112,9 @@ def home_view(request):
     return render(request, "blog/home.html", context=context)
 
 
+def contact_us_view(request):
+    return render(request, "contact_us.html", {})
+
+
 def privacy_policy_view(request):
     return render(request, "privacy_policy.html", {})
