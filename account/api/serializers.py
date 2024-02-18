@@ -1,7 +1,7 @@
 from fileinput import filename
 from rest_framework import serializers
 
-from account.models import Account, Upload
+from account.models import Account, Upload, FileTest
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -67,4 +67,12 @@ class UploadSerializer(serializers.ModelSerializer):
 	class Meta:
 
 		model = Upload
+		fields = '__all__'
+
+
+class FileTestSerializer(serializers.ModelSerializer):
+
+	class Meta:
+
+		model = FileTest
 		fields = '__all__'

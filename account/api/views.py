@@ -15,7 +15,8 @@ from account.api.serializers import (
 	 RegistrationSerializer, 
 	 AccountPropertiesSerializer, 
 	 ChangePasswordSerializer,
-	 UploadSerializer
+	 UploadSerializer,
+	 FileTestSerializer
 )
 from account.models import Account
 from rest_framework.authtoken.models import Token
@@ -291,6 +292,30 @@ def upload_image(request):
 			return Response({
 				"uploaded" : True,
 				"url" : "https://educodiv.com" + data.upload.url
+			})
+		else:
+			return Response({
+				"uploaded" : False,
+				"url" : ""
+			}, status=400)
+
+
+
+
+
+@api_view(['POST', ])
+@permission_classes([])
+@authentication_classes([])
+def file_test_view(request):
+
+	if request.method == 'POST':
+		serializer = FileTestSerializer(data=request.data)
+
+		if serializer.is_valid():
+			data = serializer.save()
+			return Response({
+				"uploaded" : True,
+				"url" : "https://playreviewhub.com" + data.file.url
 			})
 		else:
 			return Response({

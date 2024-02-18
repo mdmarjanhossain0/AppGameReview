@@ -64,7 +64,11 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-
+class FileTest(models.Model):
+    file = models.FileField(upload_to="test_files/", null=False, blank=False)
+    created_at = models.DateTimeField(verbose_name="created_at", auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name="updated_at", auto_now=True)
+    
 import time
 
 

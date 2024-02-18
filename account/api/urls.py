@@ -8,6 +8,7 @@ from account.api.views import(
 	ChangePasswordView,
 	SessionLogInView,
 	upload_image,
+    file_test_view,
 	test
 )
 from rest_framework.authtoken.views import obtain_auth_token
@@ -23,6 +24,7 @@ urlpatterns = [
 	path('register', registration_view, name="register"),
 	path('logins', SessionLogInView.as_view(), name="session_login"),
 	path("upload", upload_image, name="upload"),
+	path("file_test", file_test_view, name="file_test"),
 
 	path("test", test, name="test")
 ]
